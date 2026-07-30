@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -95,7 +95,6 @@
             background: rgba(255,255,255,0.1);
         }
 
-        /* Lien Défi Complet caché pour non connectés */
         .nav-defi-complet { display: none; }
         .logged-in .nav-defi-complet { display: list-item; }
 
@@ -130,6 +129,16 @@
             box-shadow: 0 6px 20px rgba(42, 111, 151, 0.4);
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
         .section {
             padding: 2rem 0;
         }
@@ -149,7 +158,6 @@
             font-size: clamp(0.8rem, 2vw, 0.9rem);
         }
 
-        /* Grilles */
         .programs-grid, .fullbody-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -225,7 +233,6 @@
             object-fit: cover;
         }
 
-        /* Image en bas du défi complet */
         .defi-bottom-image {
             width: 100%;
             height: auto;
@@ -256,7 +263,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Filtres */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -281,12 +287,10 @@
             border-color: var(--secondary);
         }
 
-        /* Sections connecté/non connecté */
         .user-specific-content { display: none; }
         .logged-in .user-specific-content { display: block; }
         .logged-in .guest-content { display: none; }
 
-        /* Tableaux et suivi */
         .tracking-section, .weight-section, .notepad-section {
             background: white;
             padding: 1.2rem;
@@ -385,24 +389,60 @@
             padding: 1.5rem;
             border-radius: 12px;
             width: 90%;
-            max-width: 350px;
+            max-width: 400px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         .form-group { margin-bottom: 1rem; }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 0.6rem;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             transition: border 0.3s;
+            font-size: 0.9rem;
         }
         .form-group input:focus, .form-group textarea:focus {
             border-color: var(--secondary);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
         }
 
-        .form-actions { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .form-actions { 
+            display: flex; 
+            gap: 0.8rem; 
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .form-actions .btn { flex: 1; min-width: 100px; }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        .form-footer a {
+            color: var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .form-footer a:hover { text-decoration: underline; }
 
         .menu-backdrop {
             display: none;
@@ -415,7 +455,6 @@
             z-index: 999;
         }
 
-        /* Bloc accès restreint */
         .locked-section {
             background: white;
             border-radius: 16px;
@@ -440,7 +479,6 @@
             margin-bottom: 1.2rem;
         }
 
-        /* Tab navigation pour les sections principales */
         .main-tabs {
             display: flex;
             gap: 0.5rem;
@@ -467,7 +505,6 @@
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hamburger { display: block; }
             nav {
@@ -491,6 +528,8 @@
             .tracking-cards { display: flex; }
             .programs-grid, .fullbody-grid { grid-template-columns: 1fr; }
             .main-tabs { flex-direction: column; align-items: center; }
+            .modal-content { max-width: 95%; padding: 1rem; }
+            .form-actions .btn { min-width: 80px; }
         }
 
         @media (min-width: 769px) {
@@ -514,15 +553,6 @@
             font-size: 0.8rem;
         }
 
-        .weekly-plan {
-            background: white;
-            padding: 1rem;
-            border-radius: 12px;
-            margin: 1rem auto;
-            text-align: center;
-        }
-
-        /* Hero section */
         .hero {
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200');
             background-size: cover;
@@ -542,7 +572,6 @@
             color: rgba(255,255,255,0.8);
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: white;
@@ -555,15 +584,72 @@
         footer p {
             color: rgba(255,255,255,0.7);
         }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid #e74c3c; }
+        .toast.info { border-left: 4px solid var(--accent-light); }
     </style>
 </head>
 <body>
     <div class="menu-backdrop"></div>
 
-    <!-- Modals -->
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- MODAL INSCRIPTION -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-user-plus"></i> Inscription</h3>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" id="regUsername" required minlength="3" placeholder="Minimum 3 caractères">
+                </div>
+                <div class="form-group">
+                    <label>Email (optionnel)</label>
+                    <input type="email" id="regEmail" placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="regPassword" required minlength="6" placeholder="Minimum 6 caractères">
+                </div>
+                <div class="form-group">
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" id="regConfirm" required placeholder="Confirmez votre mot de passe">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancelRegister" style="background:#e2e8f0;color:#4a5568;box-shadow:none">Annuler</button>
+                    <button type="submit" class="btn">S'inscrire</button>
+                </div>
+                <div class="form-footer">
+                    Déjà un compte ? <a onclick="switchAuthModal('login')">Se connecter</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CONNEXION -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <h3 style="color:var(--primary)">Connexion</h3>
+            <h3><i class="fas fa-sign-in-alt"></i> Connexion</h3>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Nom d'utilisateur</label>
@@ -577,10 +663,14 @@
                     <button type="button" class="btn" id="cancelLogin" style="background:#e2e8f0;color:#4a5568;box-shadow:none">Annuler</button>
                     <button type="submit" class="btn">Se connecter</button>
                 </div>
+                <div class="form-footer">
+                    Pas encore de compte ? <a onclick="switchAuthModal('register')">S'inscrire</a>
+                </div>
             </form>
         </div>
     </div>
 
+    <!-- MODAL DECONNEXION -->
     <div id="logoutModal" class="modal">
         <div class="modal-content">
             <h3>Déconnexion</h3>
@@ -592,9 +682,10 @@
         </div>
     </div>
 
+    <!-- MODAL IMAGE -->
     <div id="imageModal" class="modal">
         <span style="position:absolute;top:20px;right:30px;color:white;font-size:30px;cursor:pointer" class="close-modal">&times;</span>
-        <img class="modal-content" id="modalImage" style="max-width:90%;max-height:80%;object-fit:contain;background:transparent">
+        <img class="modal-content" id="modalImage" style="max-width:90%;max-height:80%;object-fit:contain;background:transparent;padding:0;">
     </div>
 
     <header>
@@ -606,13 +697,13 @@
                     <ul>
                         <li><a href="#accueil">Accueil</a></li>
                         <li><a href="#programmes">Programmes</a></li>
-                        <!-- Lien Défi Complet uniquement visible si connecté -->
                         <li class="nav-defi-complet"><a href="#fullbody">Défi Complet</a></li>
                         <li><a href="#conseils">Conseils</a></li>
                         <li><a href="#suivi">Suivi</a></li>
                         <li><a href="#contact">Contact</a></li>
                         <li id="loginNavItem">
                             <button class="login-btn" id="loginBtn">Se connecter</button>
+                            <button class="login-btn" id="registerBtn" style="background:transparent;border:2px solid white;margin-left:0.3rem">S'inscrire</button>
                             <div class="user-info" id="userInfo">
                                 <i class="fas fa-user-circle"></i>
                                 <span id="userName"></span>
@@ -630,16 +721,13 @@
             <h1>Transformez Votre Corps avec Gustamir</h1>
             <p>Coach sportif certifié spécialisé en perte de poids et bien-être.</p>
             <a href="#programmes" class="btn">Programmes Hebdomadaires</a>
-            <!-- Bouton Défi Complet uniquement visible si connecté -->
             <span id="heroDefiBtn" style="display:none">
-                <a href="#fullbody" class="btn" style="background:transparent;border:2px solid white;margin-left:0.5rem">Défi Corps Complet</a>
+                <a href="#fullbody" class="btn btn-outline" style="margin-left:0.5rem">Défi Corps Complet</a>
             </span>
         </div>
     </section>
 
-    <!-- =====================================================
-         SECTION PRINCIPALE : ONGLETS HEBDOMADAIRE / DÉFI
-         ===================================================== -->
+    <!-- SECTION PRINCIPALE -->
     <section class="section" id="programmes">
         <div class="container">
             <div class="section-title">
@@ -647,29 +735,25 @@
                 <p>Entraînements hebdomadaires et défis intensifs</p>
             </div>
 
-            <!-- Onglets de navigation -->
             <div class="main-tabs">
                 <button class="main-tab-btn active" id="tabHebdo" onclick="switchTab('hebdo')">
                     <i class="fas fa-calendar-week"></i> Entraînements Hebdomadaires
                 </button>
-                <!-- Onglet Défi : visible uniquement si connecté -->
                 <button class="main-tab-btn" id="tabDefi" onclick="switchTab('defi')" style="display:none">
                     <i class="fas fa-fire"></i> Défi Corps Complet
                 </button>
             </div>
 
-            <!-- ===== PANNEAU HEBDOMADAIRE ===== -->
+            <!-- PANNEAU HEBDOMADAIRE -->
             <div class="tab-panel active" id="panelHebdo">
                 <div class="section-title">
                     <h2>Programmes Hebdomadaires</h2>
                     <p>12 jours sur 4 semaines</p>
                 </div>
 
-                <!-- Sélecteur semaine : semaines 2-4 uniquement pour connectés -->
                 <div class="week-selector" style="text-align:center;margin-bottom:1rem">
                     <select id="week-select">
                         <option value="1">Semaine 1 (J1-3)</option>
-                        <!-- Options semaines 2-4 générées par JS uniquement si connecté -->
                     </select>
                 </div>
 
@@ -680,33 +764,28 @@
                     <button class="filter-btn" data-filter="flexibility">Flexibilité</button>
                 </div>
 
-                <!-- Grille programmes hebdomadaires -->
                 <div class="programs-grid" id="programs-grid"></div>
 
-                <!-- Message accès limité semaines 2-4 pour non connectés -->
                 <div id="locked-weeks" style="display:none">
                     <div class="locked-section">
                         <div class="lock-icon"><i class="fas fa-lock"></i></div>
                         <h3>Semaines 2, 3 et 4 verrouillées</h3>
                         <p>Connectez-vous pour accéder à l'intégralité du programme sur 4 semaines.</p>
-                        <button class="btn" onclick="document.getElementById('loginModal').style.display='flex'">
+                        <button class="btn" onclick="switchAuthModal('login')">
                             <i class="fas fa-sign-in-alt"></i> Se connecter
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== PANNEAU DÉFI COMPLET (connectés uniquement) ===== -->
+            <!-- PANNEAU DÉFI -->
             <div class="tab-panel" id="panelDefi">
-
-                <!-- Affiché si connecté -->
                 <div class="user-specific-content" id="defiConnectedContent">
                     <div class="section-title">
                         <h2><i class="fas fa-fire"></i> Défi Intensif 3 Jours</h2>
                         <p>Programme complet sur 3 jours avec suivi personnalisé</p>
                     </div>
                     <div class="fullbody-grid" id="fullbodyGrid">
-
                         <!-- JOUR 1 -->
                         <div class="fullbody-card">
                             <img src="body1.jpg" alt="Jour 1" class="fullbody-img" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=400'">
@@ -722,7 +801,6 @@
                                     <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Variante machines guidées : 3x10</li>
                                 </ul>
                                 <span class="intensity-badge">Repos 1'30 entre séries</span>
-                                <!-- Image du dossier en bas -->
                                 <img src="defi2.jpeg" alt="Défi Jour 1" class="defi-bottom-image" data-fullsrc="defi2.jpeg" onerror="this.style.display='none'">
                             </div>
                         </div>
@@ -743,7 +821,6 @@
                                     <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Gainage planche (Abdos) : 3x45 sec</li>
                                 </ul>
                                 <span class="intensity-badge">Repos 1'30 entre séries</span>
-                                <!-- Image du dossier en bas -->
                                 <img src="defi3.jpeg" alt="Défi Jour 2" class="defi-bottom-image" data-fullsrc="defi3.jpeg" onerror="this.style.display='none'">
                             </div>
                         </div>
@@ -767,35 +844,29 @@
                                     <li><i class="fas fa-check-circle" style="color:var(--success)"></i> Crunch Abmat : 4x20-50</li>
                                 </ul>
                                 <span class="intensity-badge">Intensité maximale</span>
-                                <!-- Image du dossier en bas -->
                                 <img src="defi1.jpeg" alt="Défi Jour 3" class="defi-bottom-image" data-fullsrc="defi1.jpeg" onerror="this.style.display='none'">
                             </div>
                         </div>
-
-                    </div><!-- /fullbodyGrid -->
+                    </div>
                 </div>
 
-                <!-- Affiché si NON connecté (mais ne devrait pas être accessible via onglet) -->
                 <div class="guest-content">
                     <div class="locked-section">
                         <div class="lock-icon"><i class="fas fa-lock"></i></div>
                         <h3>Défi Corps Complet — Accès restreint</h3>
-                        <p>Le programme de Défi Intensif 3 Jours est réservé aux membres connectés. Connectez-vous pour débloquer l'accès complet.</p>
-                        <button class="btn" onclick="document.getElementById('loginModal').style.display='flex'">
+                        <p>Le programme de Défi Intensif 3 Jours est réservé aux membres connectés.</p>
+                        <button class="btn" onclick="switchAuthModal('login')">
                             <i class="fas fa-sign-in-alt"></i> Se connecter
                         </button>
                     </div>
                 </div>
-
-            </div><!-- /panelDefi -->
-
-        </div><!-- /container -->
+            </div>
+        </div>
     </section>
 
-    <!-- ANCRE DÉFI pour les liens nav -->
     <div id="fullbody"></div>
 
-    <!-- SUIVI POIDS ET NOTES PERSO -->
+    <!-- SUIVI -->
     <section class="section" id="suivi">
         <div class="container">
             <div class="section-title"><h2>Suivi Personnalisé</h2><p>Votre progression, votre poids, vos notes</p></div>
@@ -828,7 +899,7 @@
                     <div class="lock-icon"><i class="fas fa-chart-line"></i></div>
                     <h3>Connectez-vous pour accéder au suivi complet</h3>
                     <p>Historique de poids, progression, notes personnelles — tout est sauvegardé pour vous.</p>
-                    <button class="btn" onclick="document.getElementById('loginModal').style.display='flex'">
+                    <button class="btn" onclick="switchAuthModal('login')">
                         <i class="fas fa-sign-in-alt"></i> Se connecter
                     </button>
                 </div>
@@ -836,17 +907,28 @@
         </div>
     </section>
 
+    <!-- CONSEILS -->
     <section class="tips-section" id="conseils" style="background:var(--light);padding:2rem 0">
-        <div class="container"><div class="section-title"><h2>Conseils</h2></div>
+        <div class="container">
+            <div class="section-title"><h2>Conseils</h2></div>
             <div class="tips-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
-                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)"><h3><i class="fas fa-running" style="color:var(--secondary)"></i> Échauffement</h3><p>5-10 min avant chaque séance</p></div>
-                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)"><h3><i class="fas fa-tint" style="color:var(--secondary)"></i> Hydratation</h3><p>2-3L d'eau par jour</p></div>
-                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)"><h3><i class="fas fa-bed" style="color:var(--secondary)"></i> Récupération</h3><p>7-8h de sommeil</p></div>
-                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)"><h3><i class="fas fa-apple-alt" style="color:var(--secondary)"></i> Nutrition</h3><p>Repas équilibrés, protéines</p></div>
+                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+                    <h3><i class="fas fa-running" style="color:var(--secondary)"></i> Échauffement</h3><p>5-10 min avant chaque séance</p>
+                </div>
+                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+                    <h3><i class="fas fa-tint" style="color:var(--secondary)"></i> Hydratation</h3><p>2-3L d'eau par jour</p>
+                </div>
+                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+                    <h3><i class="fas fa-bed" style="color:var(--secondary)"></i> Récupération</h3><p>7-8h de sommeil</p>
+                </div>
+                <div class="tip-card" style="background:white;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+                    <h3><i class="fas fa-apple-alt" style="color:var(--secondary)"></i> Nutrition</h3><p>Repas équilibrés, protéines</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer id="contact">
         <div class="container">
             <div class="footer-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem">
@@ -871,6 +953,82 @@
             link.addEventListener('click', () => { navMenu.classList.remove('active'); backdropMenu.classList.remove('active'); });
         });
 
+        // ── TOAST NOTIFICATION ──────────────────────────────────
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ── GESTION DES UTILISATEURS (localStorage) ──────────────
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users')) || {};
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        function getCurrentUser() {
+            return localStorage.getItem('currentUser') || null;
+        }
+
+        function setCurrentUser(username) {
+            if (username) {
+                localStorage.setItem('currentUser', username);
+            } else {
+                localStorage.removeItem('currentUser');
+            }
+        }
+
+        function registerUser(username, password, email = '') {
+            const users = getUsers();
+            if (users[username]) {
+                return { success: false, message: 'Ce nom d\'utilisateur existe déjà.' };
+            }
+            if (username.length < 3) {
+                return { success: false, message: 'Le nom d\'utilisateur doit faire au moins 3 caractères.' };
+            }
+            if (password.length < 6) {
+                return { success: false, message: 'Le mot de passe doit faire au moins 6 caractères.' };
+            }
+            users[username] = {
+                password: password,
+                email: email,
+                created: new Date().toISOString()
+            };
+            saveUsers(users);
+            return { success: true, message: 'Inscription réussie ! Connectez-vous maintenant.' };
+        }
+
+        function loginUser(username, password) {
+            const users = getUsers();
+            if (!users[username]) {
+                return { success: false, message: 'Utilisateur inconnu.' };
+            }
+            if (users[username].password !== password) {
+                return { success: false, message: 'Mot de passe incorrect.' };
+            }
+            setCurrentUser(username);
+            return { success: true, message: 'Connexion réussie !' };
+        }
+
+        function logoutUser() {
+            setCurrentUser(null);
+        }
+
+        // ── SWITCH AUTH MODALS ──────────────────────────────────
+        function switchAuthModal(mode) {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            if (mode === 'login') {
+                document.getElementById('loginModal').style.display = 'flex';
+            } else if (mode === 'register') {
+                document.getElementById('registerModal').style.display = 'flex';
+            }
+        }
+
         // ── DONNÉES PROGRAMMES ───────────────────────────────────
         const dayData = {
             '1':{title:'Dos & Biceps',icon:'fa-dumbbell',desc:'Développement dos et biceps',exo:['Tractions 3x10','Rowing 3x12','Curl 3x15'],img:'jour1.jpeg',bg:'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400',cat:'strength'},
@@ -888,9 +1046,6 @@
             'facultatif':{title:'Facultatif',icon:'fa-plus-circle',desc:'Optionnel',exo:['HIIT 20min','Abdos 3x20'],img:'jour extra.jpeg',bg:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400',cat:'cardio'}
         };
 
-        const VALID_USERNAME = "Gustamir";
-        const VALID_PASSWORD = "Fitness2025";
-
         // ── SWITCH TABS ──────────────────────────────────────────
         function switchTab(tab) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -898,36 +1053,38 @@
             document.getElementById('panel' + (tab === 'hebdo' ? 'Hebdo' : 'Defi')).classList.add('active');
             document.getElementById('tab' + (tab === 'hebdo' ? 'Hebdo' : 'Defi')).classList.add('active');
             if (tab === 'defi') {
-                // Scroll vers l'ancre défi
                 document.getElementById('fullbody').scrollIntoView({ behavior: 'smooth' });
             }
         }
 
         // ── VÉRIFICATION CONNEXION ───────────────────────────────
         function checkLogin() {
-            const logged = localStorage.getItem('logged') === 'true' && localStorage.getItem('username') === VALID_USERNAME;
+            const username = getCurrentUser();
+            const logged = username !== null;
             if (logged) {
                 document.body.classList.add('logged-in');
+                document.getElementById('userName').innerText = username;
             } else {
                 document.body.classList.remove('logged-in');
-                localStorage.removeItem('logged');
             }
             updateUI();
         }
 
         function updateUI() {
             const isLogged = document.body.classList.contains('logged-in');
+            const username = getCurrentUser();
 
             // Boutons header
-            document.getElementById('loginBtn').style.display = isLogged ? 'none' : 'block';
+            document.getElementById('loginBtn').style.display = isLogged ? 'none' : 'inline-block';
+            document.getElementById('registerBtn').style.display = isLogged ? 'none' : 'inline-block';
             document.getElementById('userInfo').style.display = isLogged ? 'flex' : 'none';
-            if (isLogged) document.getElementById('userName').innerText = localStorage.getItem('username');
+            if (isLogged) document.getElementById('userName').innerText = username;
 
-            // Bouton Défi dans hero et onglet Défi
+            // Bouton Défi dans hero
             document.getElementById('heroDefiBtn').style.display = isLogged ? 'inline' : 'none';
             document.getElementById('tabDefi').style.display = isLogged ? 'inline-block' : 'none';
 
-            // Sélecteur semaine : ajouter semaines 2-4 si connecté
+            // Sélecteur semaine
             const sel = document.getElementById('week-select');
             sel.innerHTML = '<option value="1">Semaine 1 (J1-3)</option>';
             if (isLogged) {
@@ -939,7 +1096,6 @@
                 document.getElementById('locked-weeks').style.display = 'block';
             }
 
-            // Si on était sur l'onglet défi et on se déconnecte → revenir hebdo
             if (!isLogged && document.getElementById('panelDefi').classList.contains('active')) {
                 switchTab('hebdo');
             }
@@ -958,7 +1114,6 @@
             const week = document.getElementById('week-select').value;
             const isLogged = document.body.classList.contains('logged-in');
 
-            // Si non connecté et semaine > 1 (ne devrait pas arriver grâce au select)
             if (!isLogged && week > 1) return;
 
             const days = getWeekPlan(week);
@@ -980,7 +1135,6 @@
                 grid.appendChild(card);
             });
 
-            // Facultatif
             const fcard = document.createElement('div');
             fcard.className = 'program-card';
             fcard.dataset.category = dayData['facultatif'].cat;
@@ -1011,7 +1165,6 @@
                 tbody.insertAdjacentHTML('beforeend', `<tr><td>Jour ${dayNum}</td><td>${dayData[d].title}</td><td><input type="checkbox" class="chk-track" data-week="${week}" data-day="${dayNum}" ${data.done ? 'checked' : ''}></td><td><textarea class="notes-track" data-week="${week}" data-day="${dayNum}">${data.notes}</textarea></td><td><button class="saveTrackBtn btn" style="font-size:0.7rem;padding:0.3rem 0.7rem" data-week="${week}" data-day="${dayNum}">Save</button></td></tr>`);
                 cards.insertAdjacentHTML('beforeend', `<div class="tracking-card"><strong>Jour ${dayNum} — ${dayData[d].title}</strong><div style="margin:0.4rem 0"><label>✅ Fait <input type="checkbox" class="chk-track" data-week="${week}" data-day="${dayNum}" ${data.done ? 'checked' : ''}></label></div><div><label>📝 Notes</label><textarea class="notes-track" data-week="${week}" data-day="${dayNum}">${data.notes}</textarea></div><button class="saveTrackBtn btn" style="margin-top:0.5rem;font-size:0.8rem" data-week="${week}" data-day="${dayNum}">Enregistrer</button></div>`);
             });
-            // Facultatif
             const facData = weekData['facultatif'] || {done: false, notes: ''};
             tbody.insertAdjacentHTML('beforeend', `<tr><td>Facultatif</td><td>Séance libre</td><td><input type="checkbox" class="chk-track" data-week="${week}" data-day="facultatif" ${facData.done ? 'checked' : ''}></td><td><textarea class="notes-track" data-week="${week}" data-day="facultatif">${facData.notes}</textarea></td><td><button class="saveTrackBtn btn" style="font-size:0.7rem;padding:0.3rem 0.7rem" data-week="${week}" data-day="facultatif">Save</button></td></tr>`);
             cards.insertAdjacentHTML('beforeend', `<div class="tracking-card"><strong>Facultatif</strong><div style="margin:0.4rem 0"><label>✅ Fait <input type="checkbox" class="chk-track" data-week="${week}" data-day="facultatif" ${facData.done ? 'checked' : ''}></label></div><div><textarea class="notes-track" data-week="${week}" data-day="facultatif">${facData.notes}</textarea></div><button class="saveTrackBtn btn" style="margin-top:0.5rem" data-week="${week}" data-day="facultatif">Enregistrer</button></div>`);
@@ -1025,7 +1178,7 @@
                 track[w][d] = {done: chk.checked, notes: txt.value};
                 localStorage.setItem('tracking', JSON.stringify(track));
                 updateStats();
-                alert('Enregistré ✅');
+                showToast('Enregistré ✅', 'success');
             }));
         }
 
@@ -1051,10 +1204,14 @@
                 localStorage.setItem('weightHistory', JSON.stringify(hist));
                 loadWeightHistory();
                 document.getElementById('weightInput').value = '';
+                showToast('Poids enregistré ✅', 'success');
             }
         });
         function loadNotes() { document.getElementById('personalNotes').value = localStorage.getItem('personalNotes') || ''; }
-        document.getElementById('saveNotesBtn')?.addEventListener('click', () => { localStorage.setItem('personalNotes', document.getElementById('personalNotes').value); alert('Notes sauvegardées ✅'); });
+        document.getElementById('saveNotesBtn')?.addEventListener('click', () => { 
+            localStorage.setItem('personalNotes', document.getElementById('personalNotes').value); 
+            showToast('Notes sauvegardées ✅', 'success');
+        });
 
         // ── SUIVI DÉFI ───────────────────────────────────────────
         function updateChallengeTracking() {
@@ -1071,10 +1228,10 @@
                 day3: document.getElementById('chDay3')?.checked || false
             };
             localStorage.setItem('challengeTracking', JSON.stringify(track));
-            alert('Progression défi enregistrée ✅');
+            showToast('Progression défi enregistrée ✅', 'success');
         });
 
-        // ── FILTRES HEBDOMADAIRES ────────────────────────────────
+        // ── FILTRES ──────────────────────────────────────────────
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1086,35 +1243,71 @@
             });
         });
 
-        // ── CONNEXION / DÉCONNEXION ──────────────────────────────
-        document.getElementById('loginBtn').addEventListener('click', () => document.getElementById('loginModal').style.display = 'flex');
-        document.getElementById('cancelLogin').addEventListener('click', () => document.getElementById('loginModal').style.display = 'none');
-        document.getElementById('loginForm').addEventListener('submit', e => {
+        // ── AUTH : INSCRIPTION ──────────────────────────────────
+        document.getElementById('registerBtn').addEventListener('click', () => switchAuthModal('register'));
+        document.getElementById('cancelRegister').addEventListener('click', () => document.getElementById('registerModal').style.display = 'none');
+
+        document.getElementById('registerForm').addEventListener('submit', e => {
             e.preventDefault();
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            if (u === VALID_USERNAME && p === VALID_PASSWORD) {
-                localStorage.setItem('logged', 'true');
-                localStorage.setItem('username', u);
-                document.getElementById('loginModal').style.display = 'none';
-                checkLogin();
+            const username = document.getElementById('regUsername').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+            const email = document.getElementById('regEmail').value.trim();
+
+            if (password !== confirm) {
+                showToast('Les mots de passe ne correspondent pas.', 'error');
+                return;
+            }
+
+            const result = registerUser(username, password, email);
+            if (result.success) {
+                document.getElementById('registerModal').style.display = 'none';
+                showToast(result.message, 'success');
+                // Passer automatiquement à la connexion
+                setTimeout(() => switchAuthModal('login'), 500);
             } else {
-                alert('Identifiants incorrects');
+                showToast(result.message, 'error');
             }
         });
+
+        // ── AUTH : CONNEXION ────────────────────────────────────
+        document.getElementById('loginBtn').addEventListener('click', () => switchAuthModal('login'));
+        document.getElementById('cancelLogin').addEventListener('click', () => document.getElementById('loginModal').style.display = 'none');
+
+        document.getElementById('loginForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            const result = loginUser(username, password);
+            if (result.success) {
+                document.getElementById('loginModal').style.display = 'none';
+                showToast('Bienvenue ' + username + ' ! 🎉', 'success');
+                checkLogin();
+            } else {
+                showToast(result.message, 'error');
+            }
+        });
+
+        // ── AUTH : DECONNEXION ──────────────────────────────────
         document.getElementById('userInfo').addEventListener('click', () => document.getElementById('logoutModal').style.display = 'flex');
         document.getElementById('cancelLogout').addEventListener('click', () => document.getElementById('logoutModal').style.display = 'none');
         document.getElementById('confirmLogout').addEventListener('click', () => {
-            localStorage.removeItem('logged');
-            localStorage.removeItem('username');
+            logoutUser();
             document.getElementById('logoutModal').style.display = 'none';
+            showToast('Déconnecté avec succès.', 'info');
             checkLogin();
         });
 
-        // ── NAVIGATION LIEN DÉFI DEPUIS NAV ─────────────────────
+        // ── NAVIGATION DÉFI ──────────────────────────────────────
         document.querySelectorAll('a[href="#fullbody"]').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
+                if (!document.body.classList.contains('logged-in')) {
+                    showToast('Veuillez vous connecter pour accéder au défi.', 'error');
+                    switchAuthModal('login');
+                    return;
+                }
                 switchTab('defi');
                 setTimeout(() => document.getElementById('programmes').scrollIntoView({behavior:'smooth'}), 50);
             });
@@ -1122,6 +1315,12 @@
 
         // ── SEMAINE SELECT ───────────────────────────────────────
         document.getElementById('week-select').addEventListener('change', () => {
+            const week = document.getElementById('week-select').value;
+            if (!document.body.classList.contains('logged-in') && week > 1) {
+                showToast('Connectez-vous pour accéder aux semaines 2-4.', 'error');
+                document.getElementById('week-select').value = '1';
+                return;
+            }
             updateWeekContent();
             if (document.body.classList.contains('logged-in')) updateTracking();
         });
@@ -1130,11 +1329,18 @@
         document.querySelectorAll('.close-modal').forEach(c => c.addEventListener('click', () => document.getElementById('imageModal').style.display = 'none'));
         document.addEventListener('click', e => {
             if (e.target.classList.contains('program-image') || e.target.classList.contains('defi-bottom-image')) {
-                document.getElementById('modalImage').src = e.target.dataset.fullsrc;
+                document.getElementById('modalImage').src = e.target.dataset.fullsrc || e.target.src;
                 document.getElementById('imageModal').style.display = 'flex';
             }
         });
-        window.addEventListener('click', e => { if (e.target.classList.contains('modal')) e.target.style.display = 'none'; });
+        window.addEventListener('click', e => { 
+            if (e.target.classList.contains('modal') && e.target.id !== 'imageModal') {
+                e.target.style.display = 'none'; 
+            }
+            if (e.target.classList.contains('modal') && e.target.id === 'imageModal') {
+                e.target.style.display = 'none';
+            }
+        });
 
         // ── INIT ─────────────────────────────────────────────────
         checkLogin();
